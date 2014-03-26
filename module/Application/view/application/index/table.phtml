@@ -1,0 +1,60 @@
+<table class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th class="col-lg-4">Title</th>
+        <th class="col-lg-3">Url</th>
+        <th class="col-lg-1">DateAdded</th>
+        <th class="col-lg-3">Tags</th>
+        <th class="col-lg-1">Menu</th>
+      </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->data as $url) : ?>
+            <tr>
+                <td>
+                    <a target="_blank" href="<?php echo $url['url']; ?>" title="<?php echo $this->escapeHtml($url['note']); ?>">
+                        <?php echo $this->escapeHtml($url['title']); ?>
+                    </a>
+                </td>
+                <td>
+                    <?php echo strlen($url['url']) <= 40 ? $url['url'] : substr($url['url'], 0, 37) . '...' ; ?>
+                </td>
+                <td>
+                    <?php echo $this->escapeHtml(date_format(new \DateTime($url['createdAt']), 'd/m/Y')); ?>
+                </td>
+                <td>
+                    <?php $tags = explode(',', $url['tags']); ?>
+                    <?php foreach($tags as $tag) : ?>
+                    <a class="btn btn-xs btn-success" href="<?php echo $this->url('tag', array(
+                            'slug' => trim($tag)
+                        )); ?>"><?php echo $this->escapeHtml($tag); ?></a>
+                    <?php endforeach; ?>
+                </td>
+                <td>
+                    <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <button data-toggle="dropdown" type="button" class="btn btn-xs btn-primary dropdown-toggle">
+                        Menu <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="<?php echo $this->url('edit', array(
+                                    'id' => $url['id']
+                                )); ?>"><i class="fa fa-fw fa-check-square"></i> Edit</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->url('delete', array(
+                                    'id'    => $url['id'],
+                                    'token' => md5($url['id'] . date('YHdHm'))
+                                )); ?>"><i class="fa fa-fw fa-times"></i> Delete</a>
+                            </li>
+                        </ul>
+                        </div><!-- /btn-group -->
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php echo $this->paginationControl($this->data, 'Sliding', 'application/paginator', array('slug' => $this->slug)); ?>

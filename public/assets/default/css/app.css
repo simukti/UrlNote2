@@ -1,0 +1,181 @@
+body {
+    /* padding-top: 60px; */
+    padding-bottom: 40px;
+}
+
+body, html {
+    color: #444;
+    background-color: #fff;
+    font-size: 13px;
+    line-height: 2em;
+    font-weight: 400;
+}
+em {
+    font-weight: 300;
+}
+strong, b {
+    font-weight: 600;
+}
+
+.navbar-brand {
+    padding: 10px 5px 0px;
+}
+
+a.navbar-brand img {
+    margin-left: 5px;
+    margin-top: -5px;
+    padding-bottom: 8px;
+}
+.navbar-default .navbar-nav .active a, 
+.navbar-default .navbar-nav .active a:hover, 
+.navbar-default .navbar-nav .active a:focus {
+    background-color: #101010;
+}
+.btn-danger {
+    background-color: #CB2626;
+    border-color: #CB2929;
+}
+.btn-xs {
+    padding: 2px 4px;
+}
+.btn-group .dropdown-menu li a {
+    padding: 5px 10px;
+}
+.btn-group .dropdown-menu li a {
+    background-color: #fff;
+    color: #555 !important;
+}
+.btn-group .dropdown-menu li a:hover {
+    color: #fff !important;
+}
+label, .control-label, .help-block, .checkbox, .radio {
+    font-weight: bold;
+}
+.alert {
+    padding: 5px;
+}
+.alert-dismissable .close {
+    color: #000;
+}
+.table thead tr th, 
+.table tbody tr th, 
+.table tfoot tr th, 
+.table thead tr td, 
+.table tbody tr td, 
+.table tfoot tr td {
+    vertical-align:  middle;
+}
+/* JUMBOTRON */
+.container .jumbotron {
+    padding: 0;
+    background-color: transparent;
+}
+.jumbotron {
+    font-size: 120%;
+}
+.jumbotron p {
+    line-height: 2em;
+}
+.jumbotron h1, .jumbotron .h1 {
+    font-size: 160%;
+} 
+/* END OF JUMBOTRON */
+
+/* NAVBAR TAB */
+.nav-tabs {
+    border-bottom: 1px solid #eee;
+}
+.nav-tabs li.active a, 
+.nav-tabs li.active a:hover, 
+.nav-tabs li.active a:focus {
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-left: 1px solid #eee;
+    border-bottom: none medium none;
+}
+/* END OF NAVBAR TAB */
+
+/* image box */
+.img-list {
+    padding: 4px;
+}
+.img-list img {
+    width: 100%;
+}
+.thumbnail {
+    padding: 0;
+}
+.thumbnail .caption h1 {
+    font-size: 140%;
+    font-weight: normal;
+    margin: 10px 0;
+}
+.thumbnail .caption p {
+    line-height: 2em;
+    text-align: justify;
+}
+.thumbnail .modal-footer {
+    padding: 0;
+}
+ul.thumbnail li:hover {
+    
+}
+.list-group {
+    font-size: 100%;
+}
+.list-group-item {
+    border: medium none;
+}
+.list-group-item:hover {
+    background-color: #cb2626;
+}
+.list-group a,
+.thumbnail .caption h1 a {
+    /* color: #cb2626; */
+}
+.thumbnail .caption h1 a:hover {
+    text-decoration: none;
+}
+.list-group a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.modal-footer {
+    margin-top: 5px;
+    text-align: left;
+}
+/* end of image box */
+
+/* DIVIDER */
+.hr-divider {
+    background: url("../img/divider.png") no-repeat scroll center bottom rgba(0, 0, 0, 0);
+    clear: both;
+    display: block;
+    height: 100px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+/* END OF DIVIDER */
+
+/* SECTION BOX */
+.section-box {
+    margin: 20px 0 75px 0;
+}
+.section-box  .section-title h1,
+.section-box  .section-title p {
+    font-weight: 300;
+    text-align: center;
+}
+.section-box  .section-title h1 {
+    font-size: 200%;
+}
+.section-box  .section-title p {
+    font-size: 120%;
+}
+/* END OF SECTION BOX */
+
+/* FOOTER */
+footer {
+    padding: 80px 0 40px 0;
+}
+/* END OF FOOTER */

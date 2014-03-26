@@ -1,0 +1,14 @@
+<div class="jumbotron">
+    <h1>
+        Add New
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <?php echo $this->render('application/index/form', array(
+            'form'  => $this->form,
+            'route' => $this->url($this->currentRoute(null, true))
+        )); ?>
+    </div>
+</div>

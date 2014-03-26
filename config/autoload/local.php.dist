@@ -1,0 +1,11 @@
+<?php 
+return array(
+    'db' => array(
+        'database'  => 'url_note',
+        'hostname'  => '',
+        'port'      => '',
+        'charset'   => 'UTF8',
+        'username'  => '',
+        'password'  => '',
+    ),
+);

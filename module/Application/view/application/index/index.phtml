@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <h1>
+        Url
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <?php if(count($this->data)) : ?>
+        <?php echo $this->partial('application/index/table', array(
+            'data' => $this->data,
+            /* parameter 'slug' hanya ada untuk url tipe Segment, ini diset dari controller yg memanggil view ini */
+            'slug' => $this->slug 
+        )); ?>
+        <?php endif; ?>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<?php if ($this->pageCount): ?>
+    <?php if($this->pageCount > 1) : ?>
+
+    <?php 
+        // Simukti\View\Helper\CurrentRoute
+        $currentRoute = $this->currentRoute(); 
+    ?>
+
+    <ul class="pagination pagination-md">
+        <?php /* Tombol Previous */ ?>
+        <?php if (isset($this->previous)): ?>
+            <?php /* parameter 'slug' hanya ada untuk url tipe Segment */ ?>
+            <li><a href="<?php echo $this->url($currentRoute, array('page' => $this->previous, 'slug' => $this->slug)); ?>">&laquo; Previous</a></li>
+        <?php else: ?>
+            <li class="disabled"><a href="#">&laquo; Previous</a></li>
+        <?php endif; ?>
+        
+        <?php /* Mulai untuk menuliskan nomer halaman */ ?>
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page === $this->current): ?>
+                <li class="active"><a href="#"><?php echo $page; ?></a></li>
+            <?php else: ?>
+                <?php /* parameter 'slug' hanya ada untuk url tipe Segment */ ?>
+                <li><a href="<?php echo $this->url($currentRoute, array('page' => $page, 'slug' => $this->slug)); ?>"><?php echo $page; ?></a></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        
+        
+        <?php /* Tombol Next */ ?>
+        <?php if (isset($this->next)): ?>
+            <?php /* parameter 'slug' hanya ada untuk url tipe Segment */ ?>
+            <li><a href="<?php echo $this->url($currentRoute, array('page' => $this->next, 'slug' => $this->slug)); ?>">Next &raquo;</a></li>
+        <?php else: ?>
+            <li class="disabled"><a href="#">Next &raquo;</a></li>
+        <?php endif; ?>
+        
+     </ul>
+     
+    <?php endif; ?>
+<?php endif; ?>
+

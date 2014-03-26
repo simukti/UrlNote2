@@ -1,0 +1,113 @@
+<?php 
+    $form = $this->form;
+    $form->setAttributes(array(
+        'method' => 'POST',
+        'action' => $this->route,
+        'role'   => 'form'
+    ));
+    $form->prepare();
+    
+    $title = $form->get('title');
+    $url   = $form->get('url');
+    $note  = $form->get('note');
+    $tags   = $form->get('tags');
+    
+    $errorElement = $this->formElementErrors()
+                       ->setMessageCloseString('</div>')
+                       ->setMessageOpenFormat('<div %s><button type="button" class="close" '
+                                              . 'data-dismiss="alert" aria-hidden="true">&times;</button>')
+                       ->setMessageSeparatorString('')
+                       ->setAttributes(array(
+                           'class' => 'alert alert-danger alert-dismissable fade in'
+                       ));
+?>
+
+<?php echo $this->form()->openTag($form); ?>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <?php 
+                    echo $this->formLabel($title->setOptions(array(
+                        'label' => 'URL Title'
+                    )));
+
+                    echo $this->formInput($title->setAttributes(array(
+                        'class'         => 'form-control',
+                        'placeholder'   => 'URL Title',
+                        'required'      => true
+                    )));
+                    echo $errorElement->render($title);
+                    ?>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <?php 
+                    echo $this->formLabel($url->setOptions(array(
+                        'label' => 'URL'
+                    )));
+
+                    echo $this->formInput($url->setAttributes(array(
+                        'class'         => 'form-control',
+                        'placeholder'   => 'URL',
+                        'readonly'      => ($this->readonly === true) ? true : false
+                    )));
+                    echo $errorElement->render($url);
+                    ?>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <?php 
+                    echo $this->formLabel($tags->setOptions(array(
+                        'label' => 'Tags'
+                    )));
+
+                    echo $this->formInput($tags->setAttributes(array(
+                        'class'         => 'form-control',
+                        'placeholder'   => 'Tags',
+                        'required'      => true
+                    )));
+                    echo $errorElement->render($tags);
+                    ?>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <?php 
+                    echo $this->formLabel($note->setOptions(array(
+                        'label' => 'Note'
+                    )));
+
+                    echo $this->formTextArea($note->setAttributes(array(
+                        'class'         => 'form-control',
+                        'placeholder'   => 'Note',
+                        'rows' => 4
+                    )));
+                    echo $errorElement->render($note);
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php 
+    if($form->has('id')) {
+        echo $this->formHidden($form->get('id'));
+    }
+?>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <button type="submit" class="btn btn-sm btn-success"> <i class="fa fa-save"></i> Simpan </button>
+            <a class="btn btn-sm btn-primary" href="<?php echo $this->url('home'); ?>"> <i class="fa fa-mail-reply"></i> Batal </a>
+        </div>
+    </div>
+</div>
+
+<?php echo $this->form()->closeTag(); ?>

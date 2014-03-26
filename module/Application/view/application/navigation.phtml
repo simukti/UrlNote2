@@ -1,0 +1,72 @@
+<?php
+/* @var $container Zend\Navigation\Navigation */
+$container = $this->container;
+?>
+
+<ul class="nav navbar-nav">
+    <?php foreach ($container as $page): ?>
+
+        <?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
+        <?php $hasChildren = $page->hasPages() ?>
+        <?php if (! $hasChildren): ?>
+            <li<?php echo ($page->isActive()) ? ' class="active"' : '' ?>>
+                <?php 
+                    $href   = $page->getHref();
+                    $target = $page->getTarget();
+                    $icon   = $page->get('icon');
+                    $label  = $page->getLabel();
+                ?>
+                <a class="nav-header" href="<?php echo $href ?>" 
+                <?php if ($target != ''): ?> 
+                    target="<?php echo $target; ?>" 
+                <?php endif; ?>>
+                <?php if ($icon !== ''): ?>
+                    <i class="<?php echo $icon; ?>"></i>
+                <?php endif; ?>
+                <?php echo $label; ?>
+                </a>
+            </li>
+        <?php else: ?>
+            <?php
+                $icon   = $page->get('icon');
+                $label  = $page->getLabel();
+                $pages  = $page->getPages();
+            ?>
+            <li class="dropdown<?php echo  ($page->isActive(true)) ? ' active' : '' ?>">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <?php if ($icon !== ''): ?>
+                        <i class="<?php echo $icon; ?>"></i>
+                    <?php endif; ?>
+                    <?php echo $label; ?>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <?php foreach ($pages as $child): ?>
+                        <?php 
+                            $childHref = $child->getHref();
+                            $childTarget = $child->getTarget();
+                            $childIcon = $child->get('icon');
+                            $childLabel = $child->getLabel();
+                        ?>
+                        <?php if($childLabel == '--divider--') : ?>
+                            <li class="divider"></li>
+                        <?php else : ?>
+                        <li<?php echo ($child->isActive()) ? ' class="active"' : '' ?>> <a href="<?php echo $childHref; ?>" 
+                            <?php if ($childTarget != ''): ?> 
+                                target="<?php echo $childTarget; ?>" 
+                            <?php endif; ?> >
+                            
+                            <?php if ($childIcon !== ''): ?> 
+                                <i class="<?php echo $childIcon; ?>"></i>
+                            <?php endif; ?> 
+                            
+                            <?php echo $childLabel; ?>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                    <?php endforeach ?>
+                </ul>
+            </li>   
+        <?php endif ?>
+    <?php endforeach ?>
+</ul>

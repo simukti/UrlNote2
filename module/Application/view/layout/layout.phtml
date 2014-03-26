@@ -1,0 +1,81 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('URLNote 2')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+        
+        <?php
+        if ($_SERVER['SERVER_NAME'] !== DEV_SERVER_NAME) {
+            $this->headLink()
+                 ->prependStylesheet('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+                 ->prependStylesheet('//netdna.bootstrapcdn.com/bootswatch/3.1.0/yeti/bootstrap.min.css');
+        } else {
+            $this->headLink()
+                 ->prependStylesheet($this->basePath() . '/assets/default/css/font-awesome.min.css')
+                 ->prependStylesheet($this->basePath() . '/assets/default/css/bootstrap.min.css');
+        }
+        ?>
+        
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/assets/default/img/favicon.ico'))
+                        ->appendStylesheet($this->basePath() . '/assets/default/css/app.css'); ?>
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('assets/default/img/simukti-logo.png') ?>" alt="UrlNote 2"/></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <?php echo $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav')->setPartial('application/navigation'); ?>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        
+        <div class="container"> <!-- CONTENT -->
+            <?php echo $this->partial('layout/flashmessenger'); ?>
+            <?php echo $this->content; ?>
+        </div> <!-- /CONTENT -->
+        
+        <div class="container"> <!-- FOOTER -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="text-center">&copy; 2011 - <?php echo date('Y'); ?> <a href="http://simukti.net">Sarjono Mukti Aji <i class="fa fa-fw fa-share"></i></a></p>
+                    </div>
+                </div>
+            </footer>
+        </div> <!-- /FOOTER -->
+        
+        <?php 
+            if ($_SERVER['SERVER_NAME'] !== DEV_SERVER_NAME) {
+                $this->headScript()
+                    ->prependFile('//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js')
+                    ->prependFile('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+                    ->prependFile('//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9'))
+                    ->prependFile('//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js', 'text/javascript', array('conditional' => 'lt IE 9'));
+            } else {
+                $this->headScript()
+                    ->prependFile($this->basePath() . '/assets/default/js/bootstrap.min.js')
+                    ->prependFile($this->basePath() . '/assets/default/js/jquery.min.js')
+                    ->prependFile($this->basePath() . '/assets/default/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                    ->prependFile($this->basePath() . '/assets/default/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',));
+            }
+            
+            echo $this->headScript()->appendFile($this->basePath() . '/assets/default/js/app.js');
+            echo $this->inlineScript();
+        ?>
+    </body>
+</html>
