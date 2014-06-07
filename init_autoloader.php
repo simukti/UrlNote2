@@ -8,17 +8,39 @@ define('MODULE_PATH'     , APPLICATION_PATH . DIRECTORY_SEPARATOR . 'module');
 define('DATA_PATH'       , APPLICATION_PATH . DIRECTORY_SEPARATOR . 'data');
 define('CACHE_PATH'      , DATA_PATH . DIRECTORY_SEPARATOR . 'cache');
 
-$config         = include_once CONFIG_PATH . DIRECTORY_SEPARATOR . 'autoload/env.local.php';
-$global_library = $config['environment']['global_library'];
-$zf22           = $global_library . DIRECTORY_SEPARATOR . 'zf22';
+// Composer autoloading
+if (file_exists('vendor/autoload.php')) {
+    $loader = include 'vendor/autoload.php';
+}
 
-require_once $zf22 . DIRECTORY_SEPARATOR . 'Zend' . DIRECTORY_SEPARATOR . 'Loader' 
-                   . DIRECTORY_SEPARATOR . 'ClassMapAutoloader.php';
+if (class_exists('Zend\Loader\AutoloaderFactory')) {
+    return;
+}
 
-use Zend\Loader\ClassMapAutoloader;
-use Zend\Mvc\Application;
+$zf2Path = false;
 
-$loader = new ClassMapAutoloader(array(
-    $zf22 . DIRECTORY_SEPARATOR . 'autoload_classmap.php',
-));
-$loader->register();
+if (is_dir('vendor/ZF2/library')) {
+    $zf2Path = 'vendor/ZF2/library';
+} elseif (getenv('ZF2_PATH')) {      // Support for ZF2_PATH environment variable or git submodule
+    $zf2Path = getenv('ZF2_PATH');
+} elseif (get_cfg_var('zf2_path')) { // Support for zf2_path directive value
+    $zf2Path = get_cfg_var('zf2_path');
+}
+
+if ($zf2Path) {
+    if (isset($loader)) {
+        $loader->add('Zend', $zf2Path);
+        $loader->add('ZendXml', $zf2Path);
+    } else {
+        include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
+        Zend\Loader\AutoloaderFactory::factory(array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'autoregister_zf' => true
+            )
+        ));
+    }
+}
+
+if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+    throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
+}
