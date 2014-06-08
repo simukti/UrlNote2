@@ -1,0 +1,34 @@
+<?php
+$messenger = $this->flashMessenger();
+?>
+<div class="flash">
+    <?php if ($messenger->hasMessages()) : ?>
+        <?php foreach ($messenger->getMessages() as $message) : ?>
+            <div class="alert alert-info fade in">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button"> &times; </button>
+                <h5>Info !</h5>
+                <?php echo $this->escapeHtml($message); ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if ($messenger->hasInfoMessages()) : ?>
+        <?php foreach ($messenger->getInfoMessages() as $message) : ?>
+            <div class="alert alert-info fade in">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button"> &times; </button>
+                <h5>Info !</h5>
+                <?php echo $this->escapeHtml($message); ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if ($messenger->hasErrorMessages()) : ?>
+        <div class="alert alert-danger fade in">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button"> &times; </button>
+            <h5>Error !</h5>
+            <?php foreach ($messenger->getErrorMessages() as $message) : ?>
+                <?php echo $this->escapeHtml($message); ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
