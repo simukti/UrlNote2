@@ -8,4 +8,16 @@ return array(
         'username'  => '',
         'password'  => '',
     ),
+    // GoogleAuth/config/auth.php
+    'auth' => array(
+        'session'     => array(),
+        'google_auth' => array(
+            // your google apps domain
+            'domain'              => '',
+            // https://console.developers.google.com/project
+            'clientId'            => '',
+            // https://console.developers.google.com/project
+            'clientSecret'        => '',
+        )
+    )
 );
