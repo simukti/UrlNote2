@@ -17,23 +17,28 @@ class Url extends AbstractMapper
     
     public function fetchOneById($id) 
     {
-        $select   = $this->getSelectStatement()
-                         ->where(function(Sql\Where $where) use ($id) {
-                                $where->equalTo('url.id', $id);
-                           });
+        $select  = $this->getSelectStatement()
+                        ->where(function(Sql\Where $where) use ($id) {
+                               $where->equalTo('url.id', $id);
+                          });
+                          
         $adapter = $this->getAdapter();
         $sql     = new Sql\Sql($adapter);
-        $result = $adapter->query($sql->getSqlStringForSqlObject($select), Adapter::QUERY_MODE_EXECUTE);
+        $result  = $adapter->query($sql->getSqlStringForSqlObject($select), 
+                                   Adapter::QUERY_MODE_EXECUTE);
+        
         return $result->current();
     }
     
     public function fetchAllByTagSlug($slug)
     {
-        $select   = $this->getSelectStatement()
-                         ->order('url.createdAt ' . Sql\Select::ORDER_DESCENDING);
+        $select = $this->getSelectStatement()
+                       ->order('url.createdAt ' . Sql\Select::ORDER_DESCENDING);
+        
         $select->where(function (Sql\Where $where) use ($slug) {
             $where->equalTo('tag.slug', $slug);
         });
+        
         return $select;
     }
     
@@ -42,11 +47,14 @@ class Url extends AbstractMapper
         $adapter = $this->getAdapter();
         $sql     = new Sql\Sql($adapter);
         
-        $delete = $sql->delete()->from(self::TABLE_NAME)->where(function(Sql\Where $where) use ($urlId) {
-            $where->equalTo('id', $urlId);
-        });
+        $delete = $sql->delete()
+                      ->from(self::TABLE_NAME)
+                      ->where(function(Sql\Where $where) use ($urlId) {
+                            $where->equalTo('id', $urlId);
+                        });
         
-        $adapter->query($sql->getSqlStringForSqlObject($delete), Adapter::QUERY_MODE_EXECUTE);
+        $adapter->query($sql->getSqlStringForSqlObject($delete), 
+                        Adapter::QUERY_MODE_EXECUTE);
     }
     
     public function save(array $data)
@@ -63,8 +71,14 @@ class Url extends AbstractMapper
                                'url'   => $data['url'],
                                'note'  => $data['note'],
                           ));
-            $adapter->query($sql->getSqlStringForSqlObject($insert), Adapter::QUERY_MODE_EXECUTE);
-            $urlId = $this->adapter->getDriver()->getLastGeneratedValue();
+            
+            $adapter->query($sql->getSqlStringForSqlObject($insert), 
+                            Adapter::QUERY_MODE_EXECUTE);
+            
+            $urlId = $this->adapter
+                          ->getDriver()
+                          ->getLastGeneratedValue();
+            
             return $urlId;
         } else {    // UPDATE
             $urlId = $data['id'];
@@ -80,7 +94,9 @@ class Url extends AbstractMapper
                                 $where->equalTo('id', $urlId);
                             });
             
-            $adapter->query($sql->getSqlStringForSqlObject($update), Adapter::QUERY_MODE_EXECUTE);
+            $adapter->query($sql->getSqlStringForSqlObject($update), 
+                            Adapter::QUERY_MODE_EXECUTE);
+            
             return $urlId;
         }
     }
@@ -98,9 +114,14 @@ class Url extends AbstractMapper
                         'tags' => new Sql\Expression('GROUP_CONCAT(tag.slug)')
                        ))
                        ->from(self::TABLE_NAME)
-                       ->join('url_tag', 'url_tag.url = url.id', array(), Sql\Select::JOIN_LEFT)
-                       ->join('tag', 'url_tag.tag = tag.id', array(), Sql\Select::JOIN_LEFT)
+                       ->join('url_tag', 'url_tag.url = url.id', 
+                               array(), 
+                               Sql\Select::JOIN_LEFT)
+                       ->join('tag', 'url_tag.tag = tag.id', 
+                               array(), 
+                               Sql\Select::JOIN_LEFT)
                        ->group('url.id');
+        
         return $select;
     }
 }

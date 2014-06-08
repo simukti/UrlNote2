@@ -18,20 +18,28 @@ class AuthFactory implements FactoryInterface
         $moduleConfigs  = $serviceLocator->get('Config');
         $authenticationOptions = $moduleConfigs['auth']['google_auth'];
         
-        $authenticationOptions['callbackUrl'] = $serviceLocator->get('Router')
-                                                               ->assemble(array(), array(
-                                                                   'name' => $authenticationOptions['callback_route'],
-                                                                   'force_canonical' => true
-                                                               ));
+        $callbackUrl = $serviceLocator->get('Router')
+                                      ->assemble(
+                                            array(), 
+                                            array(
+                                                'name' => $authenticationOptions['callback_route'],
+                                                'force_canonical' => true
+                                            ));
+        
+        $authenticationOptions['callbackUrl'] = $callbackUrl;
         
         /* @var $sessionManager \Zend\Session\SessionManager */
-        $sessionManager = $serviceLocator->get('googleauth.service.session')->getSessionManager();
+        $sessionManager = $serviceLocator->get('googleauth.service.session')
+                                         ->getSessionManager();
         $authenticationStorage = $sessionManager->getSaveHandler();
         
         $authenticationAdapter = new GoogleAuthAdapter();
         $authenticationAdapter->setAuthenticationOptions($authenticationOptions);
         
-        $authenticationService = new AuthenticationService($authenticationStorage, $authenticationAdapter);
+        $authenticationService = new AuthenticationService(
+                                        $authenticationStorage, 
+                                        $authenticationAdapter
+                                     );
         
         $authService = new Auth();
         $authService->setOptions($authenticationOptions)

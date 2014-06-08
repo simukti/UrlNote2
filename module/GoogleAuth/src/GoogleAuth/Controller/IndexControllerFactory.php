@@ -15,8 +15,12 @@ class IndexControllerFactory implements FactoryInterface
     {
         $serviceManager = $serviceLocator->getServiceLocator();
         $controller     = new IndexController();
-        $controller->setSessionService($serviceManager->get('googleauth.service.session'))
-                   ->setAuthService($serviceManager->get('googleauth.service.auth'));
+        $controller->setSessionService(
+                        $serviceManager->get('googleauth.service.session')
+                    )
+                   ->setAuthService(
+                        $serviceManager->get('googleauth.service.auth')
+                    );
         
         return $controller;
     }

@@ -52,7 +52,9 @@ class Session
      */
     public function getSessionContainer()
     {
-        if(null === $this->sessionContainer && ! $this->sessionContainer instanceof SessionContainer) {
+        if(null === $this->sessionContainer 
+                && ! $this->sessionContainer instanceof SessionContainer) 
+        {
             $this->sessionContainer = new SessionContainer($this->sessionNamespace);
         }
         return $this->sessionContainer;

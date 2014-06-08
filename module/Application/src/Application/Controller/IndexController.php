@@ -123,7 +123,8 @@ class IndexController extends AbstractActionController
         $view->setVariables(array(
             'form'      => $form,
             'data'      => $urlExists,
-            'readonly'  => true // cara simpel untuk memastikan url tidak berubah (html5)
+            // cara simpel untuk memastikan url tidak berubah (html5)
+            'readonly'  => true
         ));
         
         return $view;

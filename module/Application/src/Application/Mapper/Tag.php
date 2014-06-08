@@ -35,8 +35,13 @@ class Tag extends AbstractMapper
         
         $select  = $sql->select()
                        ->from(self::TABLE_NAME)
-                       ->join('url_tag', 'tag.id = url_tag.tag', array(), Sql\Select::JOIN_LEFT)
-                       ->columns(array('*', new Sql\Expression('COUNT(url_tag.tag) AS tag_count')))
+                       ->join('url_tag', 'tag.id = url_tag.tag', 
+                               array(), 
+                               Sql\Select::JOIN_LEFT)
+                       ->columns(array(
+                           '*', 
+                           new Sql\Expression('COUNT(url_tag.tag) AS tag_count')
+                        ))
                        ->group('tag.id')
                        ->having('tag_count > 0') // hanya untuk tag yang dipakai
                        ->order('tag.name ' . Sql\Select::ORDER_ASCENDING);
@@ -54,8 +59,12 @@ class Tag extends AbstractMapper
         
         $select  = $sql->select()
                        ->from(self::TABLE_NAME)
-                       ->join('url_tag', 'tag.id = url_tag.tag', array(), Sql\Select::JOIN_LEFT)
-                       ->join('url', 'url_tag.url = url.id', array(), Sql\Select::JOIN_LEFT)
+                       ->join('url_tag', 'tag.id = url_tag.tag', 
+                               array(), 
+                               Sql\Select::JOIN_LEFT)
+                       ->join('url', 'url_tag.url = url.id', 
+                               array(), 
+                               Sql\Select::JOIN_LEFT)
                        ->columns(array('name'))
                        ->where(function(Sql\Where $where) use ($urlId) {
                             $where->equalTo('url.id', $urlId);
@@ -78,7 +87,8 @@ class Tag extends AbstractMapper
                             $where->equalTo('url', $urlId);
                         });
         
-        $adapter->query($sql->getSqlStringForSqlObject($delete), Adapter::QUERY_MODE_EXECUTE);
+        $adapter->query($sql->getSqlStringForSqlObject($delete), 
+                        Adapter::QUERY_MODE_EXECUTE);
     }
     
     public function save($urlId, array $tags)
@@ -103,7 +113,8 @@ class Tag extends AbstractMapper
                                         'slug' => $slug
                                     ));
                                     
-                $adapter->query($sql->getSqlStringForSqlObject($insertTag), Adapter::QUERY_MODE_EXECUTE);
+                $adapter->query($sql->getSqlStringForSqlObject($insertTag), 
+                                Adapter::QUERY_MODE_EXECUTE);
                 
                 $tagId = $adapter->getDriver()
                                  ->getLastGeneratedValue();
@@ -118,7 +129,8 @@ class Tag extends AbstractMapper
                                 'tag' => $tagId
                             ));
                             
-            $adapter->query($sql->getSqlStringForSqlObject($insert), Adapter::QUERY_MODE_EXECUTE);
+            $adapter->query($sql->getSqlStringForSqlObject($insert), 
+                            Adapter::QUERY_MODE_EXECUTE);
         }
     }
 }

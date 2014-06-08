@@ -13,11 +13,14 @@ class CurrentRouteFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $services)
     {
-        $mvcEvent   = $services->getServiceLocator()->get('Application')->getMvcEvent();
+        $mvcEvent   = $services->getServiceLocator()
+                               ->get('Application')
+                               ->getMvcEvent();
         $routeMatch = $mvcEvent->getRouteMatch();
         
         $helper = new CurrentRoute();
-        // routeMatch diset dari sini karena jika hanya getMatchedRouteName() yang di-set
+        // routeMatch diset dari sini karena 
+        // jika hanya getMatchedRouteName() yang di-set
         // maka akan error apabila halaman yang diakses notFound.
         $helper->setRouteMatch($routeMatch)
                ->setIsError($mvcEvent->isError());

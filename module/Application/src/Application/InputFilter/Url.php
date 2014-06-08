@@ -51,7 +51,8 @@ class Url extends InputFilter
                     'options' => array(
                         'uriHandler' => new Uri\Http(),
                         'messages' => array(
-                            UriValidator::NOT_URI => 'Url yang anda input tidak valid.'
+                            UriValidator::NOT_URI => 
+                                'Url yang anda input tidak valid.'
                         )
                     ),
                 ),
@@ -91,7 +92,8 @@ class Url extends InputFilter
                     'table'   => Mapper\Url::TABLE_NAME,
                     'field'   => 'url',
                     'messages' => array(
-                        Db\RecordExists::ERROR_RECORD_FOUND => 'Url ini sudah ada, tidak boleh ada duplikasi.'
+                        Db\RecordExists::ERROR_RECORD_FOUND => 
+                            'Url ini sudah ada, tidak boleh ada duplikasi.'
                     )
                 )));
         
@@ -107,7 +109,8 @@ class Url extends InputFilter
                     'table'   => Mapper\Url::TABLE_NAME,
                     'field'   => 'url',
                     'messages' => array(
-                        Db\RecordExists::ERROR_NO_RECORD_FOUND => 'Url ini tidak boleh dirubah.'
+                        Db\RecordExists::ERROR_NO_RECORD_FOUND => 
+                            'Url ini tidak boleh dirubah.'
                     )
                 )));
         

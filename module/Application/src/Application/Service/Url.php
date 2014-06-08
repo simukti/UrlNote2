@@ -40,6 +40,7 @@ class Url
     public function setDbAdapter(Adapter $adapter)
     {
         $this->dbAdapter = $adapter;
+        
         return $this;
     }
     
@@ -56,15 +57,19 @@ class Url
      */
     public function getUrlMapper()
     {
-        if( (null === $this->urlMapper) || (! $this->urlMapper instanceof Mapper\Url) ) {
+        if( (null === $this->urlMapper) 
+                || (! $this->urlMapper instanceof Mapper\Url) ) 
+        {
             $this->setUrlMapper(new Mapper\Url($this->getDbAdapter()));
         }
+        
         return $this->urlMapper;
     }
     
     public function setUrlMapper(Mapper\Url $urlMapper)
     {
         $this->urlMapper = $urlMapper;
+        
         return $this;
     }
     
@@ -73,15 +78,19 @@ class Url
      */
     public function getTagMapper()
     {
-        if( (null === $this->tagMapper) || (! $this->tagMapper instanceof Mapper\Tag) ) {
+        if( (null === $this->tagMapper) 
+                || (! $this->tagMapper instanceof Mapper\Tag) ) 
+        {
             $this->setTagMapper(new Mapper\Tag($this->getDbAdapter()));
         }
+        
         return $this->tagMapper;
     }
     
     public function setTagMapper(Mapper\Tag $tagMapper)
     {
         $this->tagMapper = $tagMapper;
+        
         return $this;
     }
     
@@ -90,11 +99,14 @@ class Url
      */
     public function getForm()
     {
-        if( (null === $this->form) || (! $this->form instanceof Form\Url) ) {
+        if( (null === $this->form) 
+                || (! $this->form instanceof Form\Url) ) 
+        {
             $form = new Form\Url();
             $form->setInputFilter($this->getInputFilter());
             $this->setForm($form);
         }
+        
         return $this->form;
     }
     
@@ -109,7 +121,9 @@ class Url
      */
     public function getInputFilter()
     {
-        if( (null === $this->inputFilter) || (! $this->inputFilter instanceof InputFilter\Url) ) {
+        if( (null === $this->inputFilter) 
+                || (! $this->inputFilter instanceof InputFilter\Url) ) 
+        {
             $this->setInputFilter(new InputFilter\Url($this->getDbAdapter()));
         }
         return $this->inputFilter;

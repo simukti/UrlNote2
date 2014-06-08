@@ -14,6 +14,8 @@ use OAuth\Common\Http\Exception\TokenResponseException;
 
 class IndexController extends AbstractActionController
 {
+    const GOOGLE_USERINFO_URL = 'https://www.googleapis.com/oauth2/v1/userinfo';
+    
     /**
      * @var Service\Auth
      */
@@ -126,14 +128,16 @@ class IndexController extends AbstractActionController
         if(false !== $responseCode) {
             try {
                 $googleService->requestAccessToken($responseCode);
-                $identity = Json::decode($googleService->request('https://www.googleapis.com/oauth2/v1/userinfo'));
+                $request  = $googleService->request(self::GOOGLE_USERINFO_URL);
+                $identity = Json::decode($request);
                 
                 $authentication = $this->authService
                                        ->login($identity);
                 
                 if(! $authentication->isValid()) {
                     $this->flashMessenger()
-                         ->addErrorMessage(sprintf("'%s' is out of bounds.", $identity->email));
+                         ->addErrorMessage(sprintf("'%s' is out of bounds.", 
+                                                    $identity->email));
                     
                     return $this->redirect()
                                 ->toRoute($loginRoute);
@@ -146,8 +150,11 @@ class IndexController extends AbstractActionController
                             ->toRoute($routeAfterLogin);
             } catch (TokenResponseException $exc) {
                 $this->flashMessenger()
-                     ->addErrorMessage(sprintf('Access token tidak bisa dikirim lebih dari sekali.'
-                                               . ' %s', $exc->getMessage()));
+                     ->addErrorMessage(sprintf(
+                                        'Access token tidak bisa '
+                                        . 'dikirim lebih dari sekali.'
+                                        . ' %s', $exc->getMessage()));
+                
                 return $this->redirect()
                             ->toRoute($loginRoute);
             }

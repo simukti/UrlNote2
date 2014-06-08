@@ -65,7 +65,8 @@ class Auth
     }
     
     /**
-     * AuthenticationService service ini sudah harus di set $adapter dan $storage - nya melalui factory.
+     * AuthenticationService service ini 
+     * sudah harus di set $adapter dan $storage - nya melalui factory.
      * 
      * @return  \Zend\Authentication\AuthenticationService
      */
@@ -92,7 +93,8 @@ class Auth
         $credentials  = new Credentials(
             $this->getOption('clientId'),
             $this->getOption('clientSecret'),
-            $this->getOption('callbackUrl') // <-- callbackUrl di-set dari \GoogleAuth\Service\AuthFactory
+            // callbackUrl di-set dari \GoogleAuth\Service\AuthFactory
+            $this->getOption('callbackUrl')
         );
 
         $googleOauthService = new Google($credentials, 

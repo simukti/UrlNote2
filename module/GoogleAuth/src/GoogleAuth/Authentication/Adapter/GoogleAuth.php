@@ -72,14 +72,17 @@ class GoogleAuth implements AdapterInterface
     public function authenticate() 
     {
         if(! $this->getIdentity()) {
-            throw new InvalidArgumentException('Identity or credential was not provided.');
+            throw new InvalidArgumentException(
+                        'Identity or credential was not provided.'
+            );
         }
         
         $validUser = $this->validateUser();
         
         if(false === $validUser) {
             $code    = Result::FAILURE;
-            $message = sprintf("Domain '%s' is not valid.", $this->getIdentity()->hd);
+            $message = sprintf("Domain '%s' is not valid.", 
+                                $this->getIdentity()->hd);
         } else {
             $code    = Result::SUCCESS;
             $message = 'Authentication Success.';

@@ -60,8 +60,9 @@ class CurrentRoute extends AbstractHelper
     }
     
     /**
-     * Periksa apakah nama route yang di berikan adalah route yang sedang diakses. Atau ambil nama route yang sedang 
-     * diakses.
+     * Periksa apakah nama route yang di berikan 
+     * adalah route yang sedang diakses. 
+     * Atau ambil nama route yang sedang diakses.
      * 
      * @param   string  $route_name     default null
      * @return  boolean|string|array
