@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-include_once realpath(__DIR__ . '/../../init_autoloader.php');
+include_once realpath(__DIR__ . '/../../vendor/autoload.php');
  
 use Zend\Console;
 use Zend\File\ClassFileLocator;
