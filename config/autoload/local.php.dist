@@ -8,7 +8,7 @@ return array(
         'username'  => '',
         'password'  => '',
     ),
-    // GoogleAuth/config/auth.php
+    // SmxGoogleAuth/config/auth.php
     'auth' => array(
         'session'     => array(),
         'google_auth' => array(

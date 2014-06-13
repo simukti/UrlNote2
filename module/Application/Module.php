@@ -33,7 +33,7 @@ class Module
         }
         
         $userService = $controller->getServiceLocator()
-                                  ->get('googleauth.service.auth');
+                                  ->get('smx.googleauth.service.auth');
         $authService = $userService->getAuthenticationService();
         
         if(! $authService->hasIdentity()) {

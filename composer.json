@@ -3,8 +3,7 @@
     "require": {
         "php": ">=5.5.0",
         "zendframework/zendframework": "2.3.*",
-        "evandotpro/edp-module-layouts": "*",
-        "lusitanian/oauth": "~0.3.0"
+        "simukti/smx-google-auth": "*"
     },
     "extra": {
         "writable": [
