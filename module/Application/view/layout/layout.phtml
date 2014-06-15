@@ -13,8 +13,8 @@
         <?php
         if ($_SERVER['SERVER_NAME'] !== DEV_SERVER_NAME) {
             $this->headLink()
-                 ->prependStylesheet('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
-                 ->prependStylesheet('//netdna.bootstrapcdn.com/bootswatch/3.1.0/yeti/bootstrap.min.css');
+                 ->prependStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
+                 ->prependStylesheet('//maxcdn.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css');
         } else {
             $this->headLink()
                  ->prependStylesheet($this->basePath() . '/assets/default/css/font-awesome.min.css')
@@ -62,16 +62,16 @@
         <?php 
             if ($_SERVER['SERVER_NAME'] !== DEV_SERVER_NAME) {
                 $this->headScript()
-                    ->prependFile('//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js')
-                    ->prependFile('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-                    ->prependFile('//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9'))
-                    ->prependFile('//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js', 'text/javascript', array('conditional' => 'lt IE 9'));
+                     ->prependFile('//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
+                     ->prependFile('//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+                     ->prependFile('//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9'))
+                     ->prependFile('//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js', 'text/javascript', array('conditional' => 'lt IE 9'));
             } else {
                 $this->headScript()
-                    ->prependFile($this->basePath() . '/assets/default/js/bootstrap.min.js')
-                    ->prependFile($this->basePath() . '/assets/default/js/jquery.min.js')
-                    ->prependFile($this->basePath() . '/assets/default/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                    ->prependFile($this->basePath() . '/assets/default/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',));
+                     ->prependFile($this->basePath() . '/assets/default/js/bootstrap.min.js')
+                     ->prependFile($this->basePath() . '/assets/default/js/jquery.min.js')
+                     ->prependFile($this->basePath() . '/assets/default/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                     ->prependFile($this->basePath() . '/assets/default/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',));
             }
             
             echo $this->headScript()->appendFile($this->basePath() . '/assets/default/js/app.js');
