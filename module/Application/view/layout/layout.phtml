@@ -26,6 +26,7 @@
                         ->appendStylesheet($this->basePath() . '/assets/default/css/app.css'); ?>
     </head>
     <body>
+        <?php if($this->identity()) : ?>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -43,12 +44,13 @@
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-        
+        <?php endif; ?>
         <div class="container"> <!-- CONTENT -->
             <?php echo $this->partial('layout/flashmessenger'); ?>
             <?php echo $this->content; ?>
         </div> <!-- /CONTENT -->
         
+        <?php if($this->identity()) : ?>
         <div class="container"> <!-- FOOTER -->
             <footer>
                 <div class="row">
@@ -58,7 +60,7 @@
                 </div>
             </footer>
         </div> <!-- /FOOTER -->
-        
+        <?php endif; ?>
         <?php 
             if ($_SERVER['SERVER_NAME'] !== DEV_SERVER_NAME) {
                 $this->headScript()
